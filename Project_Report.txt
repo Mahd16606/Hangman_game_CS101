@@ -1,0 +1,109 @@
+Project Report: Hangman Game:
+
+Introduction:
+The Hangman Game is a console-based word-guessing game implemented in C++. The program challenges the player to guess the name of a randomly selected country within a limited number of attempts. The game provides visual feedback in the form of a "hangman" diagram, which evolves based on the correctness of the player’s guesses.
+
+Features:
+1. Random Country Selection:  
+   A predefined list of countries is used. The program randomly selects a country at the start of the game.
+
+2. Player Interaction:  
+   The player inputs one letter at a time to guess the country name.
+
+3. Dynamic Feedback:  
+   - Updates the hidden country name to reveal correctly guessed letters.
+   - Displays a hangman figure that evolves with each incorrect guess.
+
+4. Victory and Defeat Scenarios:  
+   - Victory: The player guesses the country name correctly before running out of attempts.  
+   - Defeat: The player exhausts all attempts without guessing the country, resulting in a "hanged" outcome.
+
+5. Customized Graphics:  
+   ASCII art is used to visually represent the hangman’s state and game status.
+
+Implementation Steps:
+
+1. Initialization:
+- Include Libraries:  
+  The program uses `<iostream>` for input/output operations and `<ctime>` and `<cstdlib>` for random number generation.
+Global Variables:  
+  - `attempts`: Tracks the remaining guesses (initially set to 8).  
+  - `note`: Stores feedback for the player ("You have eight attempts", "Wrong", or "Good").
+
+2. Random Country Selection:
+- An array of countries (`countries[]`) is defined.  
+- A random index is generated using `rand()` seeded with the current time (`srand(time(0))`).  
+- The selected country is stored in `country`, and an equivalent-length masked string (`hidecountry`) is created with 'X'.
+
+3. Hangman Display:
+The function `hangman(char state)` is responsible for drawing the ASCII representation of the hangman.  
+- The `state` parameter determines the appearance:
+  - `'n'`: Normal gameplay.  
+  - `'f'`: Victory scenario ("free" state).  
+  - `'h'`: Defeat scenario ("hanged" state).  
+
+The hangman updates dynamically with feedback provided in the `note` variable.
+
+4. Guess Checking:
+- The function `checkguess(char guess, string realcountry, string &hiddencountry)` checks if the guessed letter exists in the country name.  
+- If the letter exists, it updates `hiddencountry` to reveal its positions and returns the number of matches.  
+- If the letter has already been guessed, the function returns `0`.
+
+5. Game Loop:
+- A `while` loop runs until the player wins or loses:
+  - Input Handling: The player guesses a letter via `cin`.  
+  - Feedback and Updates:
+    - Calls `checkguess()` to determine if the guess is correct.  
+    - Updates the hangman figure and note based on the result.  
+  - Win Condition: If `hidecountry == country`, the player wins, and the game exits the loop.  
+  - Loss Condition: If attempts reach `0`, the player loses.
+
+6. End Game:
+- Victory: The hangman figure transitions to the "free" state, and a congratulatory message is displayed.  
+- Defeat: The hangman transitions to the "hanged" state, and the correct country name is revealed.
+
+Code Explanation:
+Core Functions:
+1. hangman(char state):  
+   Displays the current state of the hangman and provides visual feedback.
+
+2. checkguess(char guess, string realcountry, string &hiddencountry):  
+   - Compares the guessed character with the actual country name.
+   - Updates the hidden country name if the guess is correct.
+
+Game Logic:
+- **Initialization**: Randomly selects a country and prepares the masked country name.  
+- **Gameplay Loop**: Continues until either the player guesses the word or runs out of attempts.  
+- **Feedback**: The hangman evolves dynamically based on the player's performance.
+
+
+Flowchart:
+
+1. Start 
+↓  
+2. Random Country Selection 
+↓  
+3. Initialize Variables 
+↓  
+4. While Attempts > 0:
+   - Display Hangman  
+   - Get User Input  
+   - Check Guess  
+   - Update Hangman and Note  
+   - Check for Win Condition  
+↓  
+**5. End Game (Win/Lose)**  
+
+Strengths of the Program:
+- **Interactivity**: Players receive dynamic feedback through visuals and messages.  
+- **Randomization**: Each game session offers a new challenge.  
+- **Code Clarity**: Modular design enhances readability and reusability.  
+
+Future Enhancements:
+1. **Expanded Word List**: Include a larger and more diverse set of words.  
+2. **Difficulty Levels**: Add options for varying word lengths and attempt limits.  
+3. **Multiplayer Mode**: Allow two players to compete.  
+4. **Graphical User Interface (GUI)**: Transition to a graphical version for an enhanced user experience.
+
+Conclusion:
+This Hangman game project demonstrates fundamental programming concepts such as loops, conditional statements, functions, and randomization. It combines logic and creativity to deliver an engaging and educational experience. With further development, this project can evolve into a more complex and feature-rich game.
